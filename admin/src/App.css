@@ -1,38 +1,239 @@
-.App {
-  text-align: center;
+
+:root {
+  --sidebar-width: 280px;
+  --primary-color: #ff5900; 
+  --secondary-color: #1e2125; 
+  --text-color-light: #f8f9fa;
+  --accent-blue: #007bff;
+}
+.sidebar-custom-width {
+  width: var(--sidebar-width) !important;
+  flex-shrink: 0;
+  top:1px !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.dark-gradient-bg {
+  background: linear-gradient(110deg, var(--accent-blue) 0%, var( --secondary-color) 100%) !important;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+}
+.text-primary-gold {
+    color: var(--primary-color) !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.sidebar-footer-bg {
+    background-color: rgba(0, 0, 0, 0.15); /* Darker footer */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* 3. Navigation Links (Core UX Improvement) */
+.nav-link-fancy {
+  color: var(--text-color-light) !important;
+  border-radius: 8px; 
+  transition: all 0.3s ease; 
+  margin-bottom: 5px; 
 }
 
-.App-link {
-  color: #61dafb;
+.nav-link-fancy:hover {
+  background-color: rgba(255, 255, 255, 0.1); 
+  transform: translateX(5px); 
+  color: var(--primary-color) !important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.nav-link-fancy .nav-icon-wrapper i {
+    font-size: 1.25rem; /* Icon size */
+    color: var(--text-color-light);
+    transition: color 0.3s ease;
+}
+
+/* Active Link Styling (Highlight) */
+.active-link-fancy {
+  background-color: var(--accent-blue) !important; /* Blue background for active link */
+  color: var(--text-color-light) !important;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4); /* Glow effect */
+  font-weight: 600 !important;
+}
+
+.active-link-fancy .nav-icon-wrapper i {
+    color: var(--primary-color) !important;
+.offcanvas-fancy {
+    /* Full-height sidebar look */
+    height: 100vh; 
+    top: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.offcanvas-fancy.show {
+    /* Custom animation for offcanvas */
+    transform: translateX(0);
+}
+
+.btn-close-fancy {
+    /* Custom close button for offcanvas */
+    padding: 0.5rem 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.btn-close-fancy:hover {
+    opacity: 1;
+}
+
+/* 5. Scrollbar Customization */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* 6. Top Bar Shadow for Mobile */
+.top-bar-shadow {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 1030;
+    position: fixed; /* Ensures it stays on top */
+    width: 100%;
+    top: 0;
+}
+}
+.dark-gradient-appbar {
+  /* Matching the dark theme of the sidebar */
+  background: linear-gradient(90deg, var(--accent-blue) 0%, var( --secondary-color) 100%) !important;
+  min-height: 65px; /* Thicker navbar */
+}
+
+/* 2. Shadow and Position */
+.topbar-shadow {
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+    z-index: 1020; /* Below offcanvas (1045) but above content */
+}
+
+/* 3. Home Button Styling */
+.btn-transparent-gold {
+    color: var(--primary-color);
+    border: none;
+    background: transparent;
+    padding: 0.5rem;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btn-transparent-gold:hover {
+    color: var(--primary-color);
+    transform: scale(1.1);
+    opacity: 0.9;
+}
+
+/* 4. Page Title Styling (Center) */
+.navbar-title-center {
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    /* Subtle glow effect */
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 1.25rem; /* Large screens */
+}
+
+@media (max-width: 991.98px) {
+    /* Hide center title on smaller screens to avoid crowding */
+    .navbar-title-center {
+        display: none !important;
+    }
+}
+
+
+/* 5. Logout Button Styling (Unique Design) */
+.btn-outline-gold {
+    color: var(--text-color-light);
+    border-color: var(--primary-color);
+    border-width: 2px;
+    border-radius: 20px; /* Pill shape */
+    padding: 0.375rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-gold:hover {
+    background-color: var(--accent-blue);
+    color: var(--secondary-color) !important;
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Highlight shadow */
+}
+/* 6. User Role Text */
+.small-role-text {
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+}
+
+
+
+/* 1. Dashboard Layout Container */
+.dashboard-container {
+    /* Ensures minimum height for content scroll */
+    min-height: 100vh; 
+    background: linear-gradient(110deg, rgb(229, 251, 254) 0%, rgb(184, 223, 255) 100%) !important;
+}
+/* 3. Header and Typography */
+.dashboard-header {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--dark-blue);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: 10px;
+}
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--dark-blue);
+}
+/* 4. Action Card Styling (The core of the UI enhancement) */
+.card-action-fancy {
+    border: none;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.card-action-fancy:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.action-card-header {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    border-radius: 12px 12px 0 0;
+}
+
+.action-button {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    transition: all 0.3s ease;
+}
+
+.action-button:hover {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
 }

@@ -1,10 +1,8 @@
 
 import axios from "axios";
-const API_URL = "http://localhost:5000/api/leave"; // Replace with your actual backend URL
-
-
-
-
+import BaseUrl from "../api/baseurl";
+const serverUrl = BaseUrl()+"leave"; // Replace with your actual backend URL
+const API_URL=serverUrl;
 const getAuthHeaders = () => ({
   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
 });
@@ -58,4 +56,3 @@ export const updateLeaveStatus = async (leaveId, status) => {
     },
   });
 };
-

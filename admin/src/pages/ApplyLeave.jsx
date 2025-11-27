@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { applyLeave, cancelLeave, getAllLeaves, getLeaveHistory } from "../services/leaveService";
+import { applyLeave, cancelLeave, getLeaveHistory } from "../services/leaveService";
 import {
   Box,
   Button,
@@ -7,9 +7,6 @@ import {
   MenuItem,
   Typography,
   CircularProgress,
-  List,
-  ListItem,
-  ListItemText,
   IconButton,
   Card,
   CardContent,
@@ -21,9 +18,7 @@ import {
 import Sidebar from "../components/Sidebar";
 import TopBar from "../components/AppBar";
 import DeleteIcon from "@mui/icons-material/Delete";
-
 const leaveTypes = ["Sick Leave", "Casual Leave", "Earned Leave", "Maternity Leave", "Paternity Leave"];
-
 const ApplyLeave = () => {
   const [loading, setLoading] = useState(false);
   const [leaveData, setLeaveData] = useState({
@@ -33,12 +28,10 @@ const ApplyLeave = () => {
     reason: "",
   });
   const [leaveHistory, setLeaveHistory] = useState([]);
-  const [message, setMessage] = useState({ text: "", type: "" });
-
+  const [message, setMessage] = useState({ text: "", type: "" })
   useEffect(() => {
     fetchLeaveHistory();
   }, []);
-
   const fetchLeaveHistory = async () => {
     console.log("Fetching leave history...");
     try {
@@ -50,12 +43,10 @@ const ApplyLeave = () => {
       setMessage({ text: "Failed to fetch leave history.", type: "error" });
     }
   };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLeaveData((prev) => ({ ...prev, [name]: value }));
   };
-
   const validateDates = () => {
     const { startDate, endDate } = leaveData;
     if (new Date(endDate) < new Date(startDate)) {
@@ -64,7 +55,6 @@ const ApplyLeave = () => {
     }
     return true;
   };
-
   const handleApplyLeave = async () => {
     console.log("Applying for leave with data:", leaveData);
 
@@ -135,7 +125,6 @@ const ApplyLeave = () => {
                   <MenuItem key={index} value={type}>{type}</MenuItem>
                 ))}
               </TextField>
-
               {/* Start Date */}
               <TextField
                 type="date"
@@ -145,9 +134,7 @@ const ApplyLeave = () => {
                 InputLabelProps={{ shrink: true }}
                 value={leaveData.startDate}
                 onChange={handleChange}
-                sx={{ mb: 2 }}
-              />
-
+                sx={{ mb: 2 }}/>
               {/* End Date */}
               <TextField
                 type="date"
@@ -157,9 +144,7 @@ const ApplyLeave = () => {
                 InputLabelProps={{ shrink: true }}
                 value={leaveData.endDate}
                 onChange={handleChange}
-                sx={{ mb: 2 }}
-              />
-
+                sx={{ mb: 2 }}/>
               {/* Reason */}
               <TextField
                 fullWidth

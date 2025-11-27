@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Box,
   Button,
   CircularProgress,
   Typography,
@@ -14,6 +13,7 @@ import {
   Avatar,
   Stack,
 } from "@mui/material";
+import OvertimeSubmit from "../pages/OvertimeSubmit"; 
 import { checkIn, checkOut, getAttendanceByUserId } from "../services/attendanceService";
 
 const AttendanceTracker = () => {
@@ -30,7 +30,6 @@ const AttendanceTracker = () => {
       fetchAttendance();
     }
   }, []);
-
   const fetchAttendance = async () => {
     try {
       const records = await getAttendanceByUserId(userId);
@@ -48,7 +47,6 @@ const AttendanceTracker = () => {
       setMessage("Failed to load attendance records.");
     }
   };
-
   const handleAttendance = async (type) => {
     setLoading(true);
     setMessage("");
@@ -73,6 +71,16 @@ const AttendanceTracker = () => {
     }
     setLoading(false);
   };
+  {!isCheckedIn && attendanceRecords.length > 0 && (
+  <OvertimeSubmit
+    attendanceId={attendanceRecords[attendanceRecords.length - 1].id}
+    date={attendanceRecords[attendanceRecords.length - 1].date}
+    shiftStart={attendanceRecords[attendanceRecords.length - 1].shiftStartTime}
+    shiftEnd={attendanceRecords[attendanceRecords.length - 1].shiftEndTime}
+    workingHours={attendanceRecords[attendanceRecords.length - 1].totalHours || 0}
+    shiftHours={attendanceRecords[attendanceRecords.length - 1].shiftHours || 9}
+  />
+)}
 
   return (
     <Card sx={{ p: 3, borderRadius: 3, boxShadow: 3 }}>
@@ -92,7 +100,6 @@ const AttendanceTracker = () => {
       <Typography variant="body1" align="center">Today's Work Progress</Typography>
       <LinearProgress variant="determinate" value={progress} sx={{ height: 10, borderRadius: 5, my: 2 }} />
       <Typography variant="body2" align="center">{totalHours.toFixed(2)} / 9 hours</Typography>
-
       <Divider sx={{ my: 2 }} />
       <Typography variant="h6" gutterBottom>Attendance History</Typography>
       <List>
@@ -101,7 +108,7 @@ const AttendanceTracker = () => {
             <ListItem key={index} sx={{ display: "flex", justifyContent: "space-between" }}>
               <Stack direction="row" alignItems="center" spacing={2}>
                 <Avatar>{index + 1}</Avatar>
-                <ListItemText primary={`Date: ${record.date}`} secondary={`Total Hours: ${record.totalHours.toFixed(2)} hrs`} />
+                <ListItemText primary={`Date: ${record.date}`} secondary={`Total Hours: ${(record.totalHours || 0).toFixed(2)} hrs`} />
               </Stack>
               <Chip label={record.inOutStatus === "IN" ? "Checked In" : "Checked Out"} color={record.inOutStatus === "IN" ? "success" : "default"} />
             </ListItem>
